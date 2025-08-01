@@ -42,7 +42,6 @@ jobs:
  build_ios:
   name: Build iOS IPA
   runs-on: macos-latest
-  # needs: build_android
 
   steps:
     - name: Checkout code
@@ -53,14 +52,14 @@ jobs:
 
     - name: Build IPA
       run: |
-        cd action-repo-main
-        xcodebuild -project action-repo.xcodeproj \
-                   -scheme action-repo \
+        cd IOS
+        xcodebuild -project SideDrawerDemo.xcodeproj \
+                   -scheme SideDrawerDemo \
                    -sdk iphoneos \
                    -configuration Release \
-                   -archivePath build/action-repo.xcarchive archive
+                   -archivePath build/SideDrawerDemo.xcarchive archive
         xcodebuild -exportArchive \
-                   -archivePath build/action-repo.xcarchive \
+                   -archivePath build/SideDrawerDemo.xcarchive \
                    -exportOptionsPlist ExportOptions.plist \
                    -exportPath build/IPA
 
@@ -68,4 +67,5 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: iOS-IPA
-        path: action-repo-main/build/IPA/*.ipa
+        path: IOS/build/IPA/*.ipa
+
