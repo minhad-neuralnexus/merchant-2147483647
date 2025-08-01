@@ -1,9 +1,0 @@
-"/Users/hamza/Desktop/action-repo/action-repo/AppDelegate.swift":
-  swiftsourceinfo: "/Users/hamza/Desktop/action-repo/build/action-repo.build/Release-iphoneos/action-repo.build/Objects-normal/arm64/action_repo.swiftsourceinfo"
-  swiftmodule: "/Users/hamza/Desktop/action-repo/build/action-repo.build/Release-iphoneos/action-repo.build/Objects-normal/arm64/action_repo.swiftmodule"
-  dependencies: "/Users/hamza/Desktop/action-repo/build/action-repo.build/Release-iphoneos/action-repo.build/Objects-normal/arm64/action-repo-master.d"
-  const-values: "/Users/hamza/Desktop/action-repo/build/action-repo.build/Release-iphoneos/action-repo.build/Objects-normal/arm64/action-repo-master.swiftconstvalues"
-  diagnostics: "/Users/hamza/Desktop/action-repo/build/action-repo.build/Release-iphoneos/action-repo.build/Objects-normal/arm64/action-repo-master.dia"
-  objc-header: "/Users/hamza/Desktop/action-repo/build/action-repo.build/Release-iphoneos/action-repo.build/Objects-normal/arm64/action_repo-Swift.h"
-  abi-baseline-json: "/Users/hamza/Desktop/action-repo/build/action-repo.build/Release-iphoneos/action-repo.build/Objects-normal/arm64/action_repo.abi.json"
-  swiftdoc: "/Users/hamza/Desktop/action-repo/build/action-repo.build/Release-iphoneos/action-repo.build/Objects-normal/arm64/action_repo.swiftdoc"
