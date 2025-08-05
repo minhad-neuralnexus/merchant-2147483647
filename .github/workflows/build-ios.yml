@@ -1,1 +1,41 @@
 
+name: Build iOS
+
+on:
+  workflow_dispatch:
+    inputs:
+      merchantId:
+        description: 'Merchant ID'
+        required: true
+        type: string
+
+jobs:
+ build_ios:
+  name: Build iOS IPA
+  runs-on: macos-latest
+
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Xcode
+      run: sudo xcode-select -s /Applications/Xcode_15.0.app
+
+    - name: Build IPA
+      run: |
+        cd IOS
+        xcodebuild -project SideDrawerDemo.xcodeproj \
+                   -scheme SideDrawerDemo \
+                   -sdk iphoneos \
+                   -configuration Release \
+                   -archivePath build/SideDrawerDemo.xcarchive archive
+        xcodebuild -exportArchive \
+                   -archivePath build/SideDrawerDemo.xcarchive \
+                   -exportOptionsPlist ExportOptions.plist \
+                   -exportPath build/IPA
+
+    - name: Upload IPA
+      uses: actions/upload-artifact@v4
+      with:
+        name: iOS-IPA
+        path: IOS/build/IPA/*.ipa
