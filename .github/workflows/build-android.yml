@@ -9,63 +9,34 @@ on:
         type: string
 
 jobs:
-  # build_android:
-  #   name: Build Android APK
-  #   runs-on: ubuntu-latest
+  build_android:
+    name: Build Android APK
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-  #     - name: Set up JDK 17
-  #       uses: actions/setup-java@v3
-  #       with:
-  #         distribution: 'temurin'
-  #         java-version: 17
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
 
-  #     - name: Set up Android SDK
-  #       uses: android-actions/setup-android@v3
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
 
-  #     - name: Grant execute permission to gradlew
-  #       run: chmod +x ToDoApp/gradlew
+      - name: Grant execute permission to gradlew
+        run: chmod +x ToDoApp/gradlew
 
-  #     - name: Build APK (assembleDebug)
-  #       working-directory: ToDoApp
-  #       run: ./gradlew assembleDebug
+      - name: Build APK (assembleDebug)
+        working-directory: ToDoApp
+        run: ./gradlew assembleDebug
 
-  #     - name: Upload Debug APK
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: ToDoApp-Debug-APK
-  #         path: ToDoApp/app/build/outputs/apk/debug/*.apk
+      - name: Upload Debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: ToDoApp-Debug-APK
+          path: ToDoApp/app/build/outputs/apk/debug/*.apk
 
- build_ios:
-  name: Build iOS IPA
-  runs-on: macos-latest
-
-  steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Set up Xcode
-      run: sudo xcode-select -s /Applications/Xcode_15.0.app
-
-    - name: Build IPA
-      run: |
-        cd IOS
-        xcodebuild -project SideDrawerDemo.xcodeproj \
-                   -scheme SideDrawerDemo \
-                   -sdk iphoneos \
-                   -configuration Release \
-                   -archivePath build/SideDrawerDemo.xcarchive archive
-        xcodebuild -exportArchive \
-                   -archivePath build/SideDrawerDemo.xcarchive \
-                   -exportOptionsPlist ExportOptions.plist \
-                   -exportPath build/IPA
-
-    - name: Upload IPA
-      uses: actions/upload-artifact@v4
-      with:
-        name: iOS-IPA
-        path: IOS/build/IPA/*.ipa
 
