@@ -1,5 +1,4 @@
-
-name: Build iOS
+name: Build iOS (Development)
 
 on:
   workflow_dispatch:
@@ -10,32 +9,33 @@ on:
         type: string
 
 jobs:
- build_ios:
-  name: Build iOS IPA
-  runs-on: macos-latest
+  build_ios:
+    name: Build iOS Archive
+    runs-on: macos-latest
 
-  steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up Xcode
-      run: sudo xcode-select -s /Applications/Xcode_15.0.app
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_15.0.app
 
-    - name: Build IPA
-      run: |
-        cd IOS
-        xcodebuild -project SideDrawerDemo.xcodeproj \
-                   -scheme SideDrawerDemo \
-                   -sdk iphoneos \
-                   -configuration Release \
-                   -archivePath build/SideDrawerDemo.xcarchive archive
-        xcodebuild -exportArchive \
-                   -archivePath build/SideDrawerDemo.xcarchive \
-                   -exportOptionsPlist ExportOptions.plist \
-                   -exportPath build/IPA
+      - name: Build Archive
+        run: |
+          set -e
+          cd IOS
+          rm -rf build/ || true
+          
+          # Build archive only (no export)
+          xcodebuild -project SideDrawerDemo.xcodeproj \
+                     -scheme SideDrawerDemo \
+                     -sdk iphoneos \
+                     -configuration Debug \
+                     -archivePath build/SideDrawerDemo.xcarchive \
+                     archive
 
-    - name: Upload IPA
-      uses: actions/upload-artifact@v4
-      with:
-        name: iOS-IPA
-        path: IOS/build/IPA/*.ipa
+      - name: Upload Archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: iOS-Archive
+          path: IOS/build/SideDrawerDemo.xcarchive
